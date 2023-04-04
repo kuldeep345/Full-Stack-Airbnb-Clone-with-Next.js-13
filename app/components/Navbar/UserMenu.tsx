@@ -4,9 +4,11 @@ import { Avatar } from './Avatar'
 import MenuItem from './MenuItem'
 import { useState } from 'react'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
+import useLoginModal from '@/app/hooks/useLoginModal'
 
 const UserMenu = () => {
     const registerModal = useRegisterModal();
+    const LoginModal = useLoginModal();
     const [isOpen , setIsOpen] = useState(false)
 
     const toggleOpen = ()=>setIsOpen((value) => !value)
@@ -34,7 +36,7 @@ const UserMenu = () => {
             <div className='absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm'>
                 <div className='flex flex-col cursor-pointer'>
                     <>
-                    <MenuItem label='Login' onClick={()=>{}}/>
+                    <MenuItem label='Login' onClick={LoginModal.onOpen}/>
                     <MenuItem label='Sign up' onClick={registerModal.onOpen}/>
                     </>
                 </div>
