@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { useCallback , useState } from 'react'
 import { FieldValue , FieldValues, SubmitHandler , useForm } from 'react-hook-form'
 import useLoginModal from "@/app/hooks/useLoginModal"
+import useRegisterModal from "@/app/hooks/useRegisterModal"
 import Modal from "./Modal"
 import Heading from "../Heading"
 import Input from "../Inputs/Input"
@@ -17,6 +18,7 @@ import { useRouter } from 'next/navigation'
 const LoginModal = () => {
     const router = useRouter()
     const LoginModal = useLoginModal();
+    const RegisterModal = useRegisterModal();
     const [ isLoading , setIsLoading ] = useState(false)
 
     const { register , handleSubmit , formState:{ errors } } = useForm<FieldValues>({
@@ -46,6 +48,11 @@ const LoginModal = () => {
             }
         })
     }
+
+    const toggle = useCallback(()=> {
+        LoginModal.onClose()
+        RegisterModal.onOpen()
+    },[LoginModal , RegisterModal])
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -81,22 +88,22 @@ const LoginModal = () => {
                 outline
                 label="Continue with Google"
                 icon={FcGoogle}
-                onClick={()=>{}}
+                onClick={()=>signIn("google")}
             />
             <Button 
                 outline
                 label="Continue with Github"
                 icon={AiFillGithub}
-                onClick={()=>{}}
+                onClick={()=>signIn("github")}
             />
             <div className="text-neutral-500 text-center mt-4 font-light"> 
                 <div className="justify-center flex flex-row items-center gap-2">
-                    <div>Already have an account?</div>
+                    <div>First time using Airbnb?</div>
                     <div
-                    onClick={LoginModal.onClose}
+                    onClick={toggle}
                     className="text-neutral-800 cursor-pointer hover:underline"
                     >
-                        Log in
+                        create an account
                     </div>
                 </div>
             </div>
