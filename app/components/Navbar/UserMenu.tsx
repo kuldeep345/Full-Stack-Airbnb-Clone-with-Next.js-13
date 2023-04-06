@@ -1,6 +1,6 @@
 'use client'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { Avatar } from './Avatar'
+import { Avatar } from '../Avatar'
 import MenuItem from './MenuItem'
 import { useCallback, useState } from 'react'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
