@@ -1,7 +1,7 @@
 'use client'
 
 import useCountries from '@/app/hooks/useCountries';
-import { SafeListings, SafeUser } from '@/app/types';
+import { SafeListings, SafeReservations, SafeUser } from '@/app/types';
 import { Reservation } from '@prisma/client';
 import { format } from 'date-fns';
 import Image from 'next/image';
@@ -12,12 +12,12 @@ import HeartButton from '../HeartButton';
 
 interface ListingCardProps {
     data:SafeListings;
-    reservation?:Reservation;
+    reservation?:SafeReservations;
     onAction?:(id:string)=>void;
     disabled?:boolean;
     actionLabel?:string;
     actionId?:string;
-    currentUser:SafeUser | null;
+    currentUser?:SafeUser | null;
 }
 
 const ListingCard:React.FC<ListingCardProps> = ({
@@ -32,7 +32,7 @@ const ListingCard:React.FC<ListingCardProps> = ({
 
     const router = useRouter()
     const { getByValue } = useCountries()
-
+  
     const location = getByValue(data.locationValue)
 
     const handleCancel = useCallback((e:React.MouseEvent<HTMLButtonElement>)=>{
